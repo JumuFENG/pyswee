@@ -71,6 +71,7 @@ class Config:
         if not os.path.isfile(cfg_path):
             allconfigs = {}
             allconfigs['log'] = {'log_level':'DEBUG', 'log_handler': ['stdout']}
+            allconfigs['client'] = {'app_name': cls.app_name}
             cls.save(allconfigs)
             return allconfigs
 
@@ -84,6 +85,10 @@ class Config:
     @classmethod
     def _check_encrypted(cls, cfg):
         pass
+
+    @classmethod
+    def client_config(cls):
+        return cls.all_configs().get('client', {})
 
 
 logging.basicConfig(
